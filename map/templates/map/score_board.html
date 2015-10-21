@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load scoreboard_extras %}
+<html>
+    <head>
+        {% load static %}
+        <title>Score Board - Hitmap</title>
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="{% static 'map/sorttable.js' %}"></script>
+        <script src="{% static 'map/score_board.js' %}"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'map/score_board.css' %}" />
+    </head>
+    <body onLoad="scoreboard_loaded()">
+        <div id="div_table_score_board">
+            <div id="div_scrollable">
+                {% if response == 'OK' %}
+                    {% if points_data %}
+                        <table id="table_score_board" class="sortable" border="0">
+                            <tr id="colnames_scoreboard">
+                                <td width="150px"> <span>STATUS</span> </td>
+                                <td width="300px"> <span>LOCATION NAME</span> </td>
+                                <td width="170px"> <span>HITSCORE / SALES INDEX</span> </td>
+                                {% for name,desc in vardesc %}
+                                    <td width="120px"> <span title=" {{ desc }} ">{{ name }}</span> </td>
+                                {% endfor%}
+                                <td> <span>Lastest Edition</span> </td>
+                                <td> <span>Edited by</span> </td>
+                            </tr>
+                            {% for point_data in points_data %}
+                                {% if point_data.status == 1 %}
+                                    <tr id="tr_{{ point_data.id }}" class="interested" onClick="parent.center_map({{ point_data.id }});">
+                                {% elif point_data.status == 2 %}
+                                    <tr id="tr_{{ point_data.id }}" class="confirm_data" onClick="parent.center_map({{ point_data.id }});">
+                                {% elif point_data.status == 3 %}
+                                    <tr id="tr_{{ point_data.id }}" class="in_negotiation" onClick="parent.center_map({{ point_data.id }});">
+                                {% elif point_data.status == 4 %}
+                                    <tr id="tr_{{ point_data.id }}" class="rejected" onClick="parent.center_map({{ point_data.id }});">
+                                {% elif point_data.status == 5 %}
+                                    <tr id="tr_{{ point_data.id }}" class="open" onClick="parent.center_map({{ point_data.id }});">
+                                {% elif point_data.status == 6 %}
+                                    <tr id="tr_{{ point_data.id }}" class="recomended" onClick="parent.center_map({{ point_data.id }});">
+                                {% else %}
+                                    <tr id="tr_{{ point_data.id }}" onClick="parent.center_map({{ point_data.id }});">
+                                {% endif %}
+                                    <td width=150>
+                                        <img width="12" height="12" src="/static/project/images/status_{{ point_data.status }}.svg" />
+                                        <span>{{ point_data.status_readable }}</span>
+                                    </td>
+                                    <td width="300px">{{ point_data.location_name }}</td>
+                                    <td width="170px"> <span> {{ point_data.hitscore }} </span></td>
+                                    {% for variable in variables %}
+                                        <td width="120px">
+                                            <span>{{ point_data|dict_data:variable }}</span>
+                                        </td>
+                                    {% endfor %}
+                                    <td>{{ point_data.edition_date }}</td>
+                                    <td>{{ point_data.edited_by.customeuser.email }}</td>
+                                </tr>
+                            {% endfor %}      
+                        </table>
+                    {% else %}
+                        <p class="p_no_point">This project has no points to show.</p>
+                    {% endif %}
+                {% endif %}
+                {% if response == 'error' %}
+                    <p class="p_error">{{ error_message }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>

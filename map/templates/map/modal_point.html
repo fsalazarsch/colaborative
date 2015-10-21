@@ -1,0 +1,95 @@
+<html>
+<head>
+{% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'map/modal.css' %}" />
+
+<title></title>
+</head>
+
+<body>
+
+<div id="openModal" class="modalDialog">
+   <a href="#close" title="Close" class="close">X</a>
+   <div class="container">
+     <section class="tabs">
+       <input id="tab-1" type="radio" name="radio-set" class="tab-selector-1" checked="checked" />
+       <label for="tab-1" class="tab-label-1">Enter Sales</label>
+       <input id="tab-2" type="radio" name="radio-set" class="tab-selector-2" />
+        <label for="tab-2" class="tab-label-2">Compute Hitscore</label>
+        <input id="tab-3" type="radio" name="radio-set" class="tab-selector-3" />
+        <label for="tab-3" class="tab-label-3">Save Without Action</label>
+	  <div class="clear-shadow"></div>
+	  <div class="content">
+	    <div class="content-1">
+	      <table columns="2" width="40%" height="60%">
+		<form id="formulario1">
+	   	  <tr>
+		    <td> Yearly Sales: </td>
+		    <td><input type="text" name="sale" id="sale"/></td>
+		  </tr>
+		  <tr>
+		    <td> Date of Oppening: </td>
+		    <td> <input style="width:120px;" type="date" name="date" id="date"/></td>
+		  </tr>  
+		  <tr>
+		    <td> Days Opened: </td>
+		    <td> <input type="text" name="days" id="days"/></td>
+		  </tr>
+		  <tr>
+		    <td> Square Feet: </td>
+		    <td> <input type="text" name="square" id="square"/></td>
+		  </tr>
+		  <tr>
+		    <td colspan="2"><button style="position:relative;left:50px;top:10px;" id="button" type="button"> Save Information </button> </td>
+		  </tr>
+		</form>	 					
+	      </table>
+	    </div>
+            <div class="content-2">
+     	     <table>
+	       <tr>
+	         <td> <label id="location_summary_hitscore_hitscore">no hitscore computed for this location</label> </td></tr>
+	       <tr>
+                 <td> <button onclick="compute_hitscore()">Compute Hitscore</button></td></tr>
+	       <tr>
+                 <td> <label id="location_summary_hitscore_model">Model message</label></td></tr>
+	       <tr>
+                 <td> <button onclick="make_hitscore_model()">Make a new model</button>
+                   <label id="mess">(it could take a while)</label>
+		 </td>
+	       </tr>
+             </table>
+	    </div>
+	    <div class="content-3">
+	      <button style="position:absolute;top:40%;left:35%;height:50px;">Save Point Location</button>
+	    <!--<table>
+	      <tr>
+		<td><span><strong>Status: </strong></span></td>
+	      </tr>	
+	      <tr>
+	        <td> <select id="select_status" onChange="change_point_status();">
+		  <option value="1">Interested</option>
+		  <option value="2">Confirm Data</option>
+		  <option value="3">In Negotiation</option>
+		  <option value="4">Rejected</option>
+		  <option value="5">Open</option>
+		</select>
+		</td>
+	      </tr>
+	      <tr>
+	        <td><input type="text" name="location_name" id="input_location_name" placeholder="Location Name" value="" /></td>
+		<td><button type="button" id="button_location_name" onClick="set_location_name()">Save</button></td>
+	      </tr>											       
+	      <tr>
+	        <td><button type="button" id="button_delete_point" onclick="location_summary_delete_point()">Delete Selected Point</button></td>
+	      </tr>
+	    </table>
+	   -->				    	
+	</div>			       
+        </div>
+      </section>
+    </div>		
+</div>
+
+</body>
+</html>

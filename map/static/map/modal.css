@@ -1,0 +1,274 @@
+.tabs {
+    position: relative;
+	margin: 40px auto;
+	width: 720px;
+	font-size: 11px;
+}
+
+.tabs input[type=radio] {
+	position: absolute;
+	z-index: 1000;
+	width: 233px;
+	height: 30px;
+	left: 0px;
+	top: 0px;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.tabs input[type=radio]#tab-2{
+	left: 240px;
+	width: 233px;
+	height: 30px;
+}
+
+.tabs input[type=radio]#tab-3{
+	left: 480px;
+	width: 233px;
+	height: 30px;
+}
+
+.tabs .tab-label-1, .tab-label-2, .tab-label-3 {
+	background: #5ba4a4;
+	background: -moz-linear-gradient(top, #5ba4a4 0%, #4e8c8a 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#5ba4a4), color-stop(100%,#4e8c8a));
+	background: -webkit-linear-gradient(top, #5ba4a4 0%,#4e8c8a 100%);
+	background: -o-linear-gradient(top, #5ba4a4 0%,#4e8c8a 100%);
+	background: -ms-linear-gradient(top, #5ba4a4 0%,#4e8c8a 100%);
+	background: linear-gradient(top, #5ba4a4 0%,#4e8c8a 100%);
+	font-size: 15px;
+	line-height: 40px;
+	height: 35px;
+	position: relative;
+	padding: 0 20px;
+        float: left;
+	display: block;
+	width: 200px;
+	color: #385c5b;
+	top: 0px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
+        border-radius: 3px 3px 0 0;
+        box-shadow: 2px 0 2px rgba(0,0,0,0.1), -2px 0 2px rgba(0,0,0,0.1);
+}
+
+.tabs label:after {
+        content: '';
+	background: #fff;
+	position: absolute;
+	bottom: -8px;
+	left: 0;
+	width: 100%;
+	height: 8px;
+	display: block;
+}
+
+.tabs input[type=radio]:hover + label {
+	background: #5ba4a4;
+	top: -8px;
+	-webkit-transition: top linear 0.2s;
+        -moz-transition: top linear 0.2s;
+        -o-transition: top linear 0.2s;
+        -ms-transition: top linear 0.2s;
+        transition: top linear 0.2s;
+}
+.tabs input[type=radio]:hover + label:after{
+	background: #5ba4a4;
+}
+.tabs input[type=radio]:hover + label ~ .clear-shadow {
+        top: -8px;
+	-webkit-transition: top linear 0.2s;
+        -moz-transition: top linear 0.2s;
+        -o-transition: top linear 0.2s;
+        -ms-transition: top linear 0.2s;
+        transition: top linear 0.2s;
+}
+
+.tabs input[type=radio]:checked:hover + label {
+        top: 0;
+}
+.tabs input[type=radio]:checked:hover + label:after{
+	background: #fff;
+}
+.tabs input[type=radio]:checked:hover + label ~ .clear-shadow {
+    top: 0;
+	background: #fff;
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	-ms-transition: none;
+	transition: none;
+}
+
+.tabs input[type=radio].tab-selector-1:hover + .tab-label-1 ~ .clear-shadow{
+        z-index: 3;
+}
+
+.tabs input[type=radio].tab-selector-2:hover + .tab-label-2 ~ .clear-shadow {
+        z-index: 2;
+}
+
+.tabs input[type=radio].tab-selector-3:hover + .tab-label-3 ~ .clear-shadow {
+        z-index: 1;
+}
+
+.tabs label:first-of-type {
+        z-index: 4;
+        box-shadow: 2px 0 2px rgba(0,0,0,0.1);
+}
+
+.tab-label-2 {
+        z-index: 3;
+}
+
+.tab-label-3 {
+        z-index: 2;
+}
+
+.tabs input[type=radio]:checked + label {
+        background: #fff;
+	z-index: 6;
+	-webkit-transition: top linear 0.2s;
+    -moz-transition: top linear 0.2s;
+    -o-transition: top linear 0.2s;
+    -ms-transition: top linear 0.2s;
+    transition: top linear 0.2s;
+}
+
+.clear-shadow {
+    background: #5ba4a4;
+	position: relative;
+	top: 0;
+    height: 10px;
+	margin-bottom: -10px;
+    clear: both;
+	z-index: -2;
+    box-shadow: 0 -2px 3px -2px rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+.content {
+    background: #fff;
+	position: relative;
+    width: 100%;  /* ancho del contenido */
+	height: 160px; /* altura del contenido */
+	z-index: 5;
+	overflow: hidden;
+    box-shadow: 0 -2px 3px -2px rgba(0,0,0,0.2), 0 2px 2px rgba(0,0,0,0.1);
+    border-radius: 0 3px 3px 3px;
+}
+
+.content div {
+    position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 100%;
+	width: 100%;
+	padding: 10px 40px;
+	overflow: hidden;
+	z-index: 1;
+    opacity: 0;
+    -webkit-transition: all linear 0.1s;
+    -moz-transition: all linear 0.1s;
+    -o-transition: all linear 0.1s;
+    -ms-transition: all linear 0.1s;
+    transition: all linear 0.1s;
+}
+
+.tabs input[type=radio].tab-selector-1:checked ~ .content .content-1,
+.tabs input[type=radio].tab-selector-2:checked ~ .content .content-2,
+.tabs input[type=radio].tab-selector-3:checked ~ .content .content-3
+ {
+	bottom: 0px;
+    z-index: 100;
+    opacity: 1;
+    -webkit-transition: all ease-out 0.2s 0.2s;
+    -moz-transition: all ease-out 0.2s 0.2s;
+    -o-transition: all ease-out 0.2s 0.2s;
+    -ms-transition: all ease-out 0.2s 0.2s;
+    transition: all ease-out 0.2s 0.2s;
+}
+
+.content div h2,
+.content div h3{
+	color: #398080;
+}
+.content div p {
+	font-size: 14px;
+	line-height: 22px;
+	font-style: italic;
+	text-align: left;
+	margin: 0;
+	color: #777;
+	padding-left: 15px;
+	font-family: Cambria, Georgia, serif;
+	border-left: 8px solid rgba(63,148,148, 0.1);
+}
+
+#sale, #date, #days, #square{
+       font-size: 10px;
+}
+
+.modalDialog {
+	position: fixed;
+	font-family: Arial, Helvetica, sans-serif;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(0,0,0,0.8);
+	z-index: 99999;
+	opacity:0;
+	-webkit-transition: opacity 400ms ease-in;
+	-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;
+	pointer-events: none;
+}
+
+.modalDialog:target {
+        opacity:1;
+        pointer-events: auto;
+}
+
+.modalDialog > div {
+        width: 730px;  /* ancho del modal */
+ 	height: 250px; /*  alto del modal */
+	position: relative;
+	margin: 10% auto;
+	padding: 5px 20px 13px 20px;
+	border-radius: 10px;
+	background: #fff;
+	background: -moz-linear-gradient(#fff, #999);
+	background: -webkit-linear-gradient(#fff, #999);
+	background: -o-linear-gradient(#fff, #999);
+}
+
+.close {
+        background: #606061;
+        color: #FFFFFF;
+        line-height: 25px;
+	position: absolute;
+	right: 290px;
+	text-align: center;
+	top: 130px;
+	width: 24px;
+	text-decoration: none;
+	font-weight: bold;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	-moz-box-shadow: 1px 1px 3px #000;
+	-webkit-box-shadow: 1px 1px 3px #000;
+	box-shadow: 1px 1px 3px #000;
+	z-index: 99999;
+}
+
+.close:hover { 
+        background: #00d9ff; 
+}
+
+
+

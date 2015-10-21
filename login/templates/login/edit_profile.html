@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'login/edit_profile.css' %}" />
+        <title>Edit Profile - HitMap</title>
+    </head>
+    <body>
+        <div id="div_content">
+            <div id="div-in-content">
+                <form action="{% url 'login:edit_profile' %}" method="post" class="edit_profile_form">
+                {% csrf_token %}
+                {% for field in form %}
+                    {{ field.errors }}
+                    {{ field.label_tag }} {{ field }}
+                {% endfor %}
+                <input type="submit" value="Save changes" />
+                <button type="button" onClick="window.location.href = {% url 'map:index' %}">Discard changes</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'project/index.css' %}" />
+        <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="{% static 'project/project_functions.js' %}"></script>
+        <title>Edit Project - HitMap</title>
+    </head>
+    <body>
+        <div id="div_content">
+            {% if form %}
+            <div id="div-in-content">
+                <p>Edit project information</p>
+                <form action="{% url 'project:index' project_id%}" method="post" class="edit_project_form">
+                {% csrf_token %}
+                {% for field in form %}
+                    {{ field.errors }}
+                    {{ field.label_tag }} {{ field }}
+                {% endfor %}
+                <input type="submit" value="Save changes" />
+                <button type="button" onClick="window.location.href = {% url 'map:index' %}">Discard changes</button>
+                </form>
+            </div>
+            {% endif %}
+            {% if project_owner %}
+                <div id="div-in-content">
+                    <p>Project owner:</p>
+                    <table>
+                        <tr>
+                            <th>email</th><th>company</th>
+                        </tr>
+                        <tr>
+                            <td><p>{{ project_owner.email }}</p></td>
+                            <td><p>{{ project_owner.company_name }}</p></td>
+                        </tr>
+                    </table>
+                </div>
+            {% endif %}
+            <div id="div-in-content">
+                <div id="div_new_user">
+                    <input id="input_new_user_mail" type="text" name="new_user_mail" placeholder="enter new user's email" value="" class="edit_project_form"/>
+                    <a href="#" onClick="add_user( {{ project_id }} ); return false;">
+                        <img src="{% static 'project/images/add_user.png' %}" width="24" height="24" title="Add a new user" />
+                    </a>
+                    <p id="p_error_message" class="error_message"></p>
+                </div>
+                <table id="table_project_users">
+                    <tr>
+                        <th>email</th><th>permissions</th>
+                    </tr>
+                {% if project_users %}
+                    <p>Users in this project:</p>
+                    {% for project_user in project_users %}
+                    <tr id="tr_{{ project_user.id }}">
+                        <td><p>{{ project_user.user.email }}</p></td>
+                        <td>
+                            <p id="p_permissions_{{ project_user.user.id }}">
+                                {% if project_user.permission == 1 %}
+                                    read and write
+                                {% elif project_user.permission == 2 %}
+                                    read only
+                                {% elif project_user.permission == 0 %}
+                                    owner
+                                {% endif %}
+                            </p>
+                        </td>
+                        <td>
+                            <a id="a_delete_{{project_user.user.id}}" href="#" onClick="delete_user({{ project_user.id }}, 'tr_{{ project_user.id }}' );return false;">
+                                <img id="img_delete_{{ project_user.user.id }}" src="{% static 'project/images/delete.png' %}" height="16" width="16" title="Delete user from project" />
+                            </a>
+                            {% if project_user.permission == 1 %}
+                                <a id="a_permissions_{{project_user.user.id}}" href="#" onClick="set_permissions( {{project_user.user.id}} , {{project_user.project.id}}, 2 );return false;">
+                                    <img id="img_permissions_{{ project_user.user.id }}" src="{% static 'project/images/read.png' %}" height="16" width="16" title="Set permissions to read only" />
+                                </a>
+                            {% else %}
+                                <a id="a_permissions_{{project_user.user.id}}" href="#" onClick="set_permissions( {{project_user.user.id}} , {{project_user.project.id}}, 1 );return false;">
+                                    <img id="img_permissions_{{ project_user.user.id }}" src="{% static 'project/images/write.png' %}" height="16" width="16" title="Set permissions to read and write" />
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+            {% endif %}
+            </table>
+            </div>
+            {% if response == "error" %}
+                <p>Error: {{ error_message }}</p>
+            {% endif %}
+        </div>
+    </body>
+</html>
+

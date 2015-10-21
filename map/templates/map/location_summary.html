@@ -1,0 +1,153 @@
+<html>
+<head>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static 'map/ficha.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'map/general.css' %}" />
+    <script type="text/javascript">
+        /*jQuery time*/
+        $(document).ready(function(){
+            $("#accordian h3").click(function(){
+                //slide up all the link lists
+                $("#accordian ul ul").slideUp();
+                //slide down the link list below the h3 clicked - only if its closed
+                if(!$(this).next().is(":visible"))
+                {
+                    $(this).next().slideDown();
+                }
+            })
+        })
+        function move_Ul(hitscore){
+            if(hitscore == null || hitscore == "undefined"){
+                // sube todos los <ul primero
+                $("#accordian ul ul").slideUp();
+                // id de los <ul, no de los <li
+                // baja el ul correspondiente
+                $("#dos").slideDown();
+            }else{
+                $("#accordian ul ul").slideUp();
+                $("#uno").slideDown();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="div_status">
+        <span><strong>Status: </strong></span>
+        <select id="select_status" onChange="change_point_status();">
+            <option value="1">Interested</option>
+            <option value="2">Confirm Data</option>
+            <option value="3">In Negotiation</option>
+            <option value="4">Rejected</option>
+            <option value="5">Open</option>
+        </select>
+        <input type="text" name="location_name" id="input_location_name" placeholder="Location Name" value="" />
+        <button type="button" id="button_location_name" onClick="set_location_name()">Save</button>
+        <button type="button" id="button_delete_point" onclick="location_summary_delete_point()">Delete Selected Point</button>
+    </div>
+
+    <div id="accordian">
+        <ul>
+            <li>
+                <h3>Hitscore</h3>
+                <ul id="ul_sales_forecast"> <li>
+                    <table>
+                        <tr><td> <label id="location_summary_hitscore_hitscore">no hitscore computed for this location</label> </td></tr>
+                        <tr><td> <button onclick="compute_hitscore()">Compute Hitscore</button></td></tr>
+                        <tr><td> <label id="location_summary_hitscore_model">Model message</label></td></tr>
+                    </table>
+                </li> </ul>
+            </li>
+            <li>
+                <h3>Sales</h3>
+                <ul id="ul_sales"> <li>
+                    <table>
+                        <tr>
+                            <td>Current Sales</td>
+                            <td> <input type="text" id="location_summary_sales_yearly_sales"> </td>
+                        </tr>
+                        <tr>
+                            <td>Date of opening</td>
+                            <td> <input type="date" id="location_summary_sales_date_opening"  placeholder="YYYY-MM-DD"> </td>
+                        </tr>
+                        <tr>
+                            <td>Days opened</td>
+                            <td> <input type="text" id="location_summary_sales_days_opened"> </td>
+                        </tr>
+                        <tr>
+                            <td>Square feet</td>
+                            <td> <input type="text" id="location_summary_sales_square_feet"> </td>
+                        </tr>
+                        <tr>
+                            <td> <button id="button_location_summary_sales_update" type="button" onclick="update_location_summary_point_sales()">Save</button>
+                            <td> <span id="location_summary_sales_done_span"></span> </td>
+                        </tr>
+                    </table>
+                    <center>
+                    <button id="button_location_summary_sales_finish" type="button" onclick="make_hitscore_model()">I am ready to make a prediction model <br>(I finished uploading my current sales)</button>
+                    </center>
+                </ul>   
+            </li>
+            <h3>Notes</h3>
+                <ul id="notes"> <li>
+                    <table>
+                        <tr>
+                            <td>Owner</td>
+                            <td> <input type="text" id="notes_owner"> </td>
+                        </tr>
+                        <tr>
+                            <td>Contact</td>
+                            <td> <input type="text" id="notes_contact"> </td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td> <input type="text" id="notes_address"> </td>
+                        </tr>
+                        <tr>
+                            <td>Price</td>
+                            <td> <select id="notes_tip_price">
+                                    <option value="">Select one option</option>
+                                    <option value="Buy_USD$">Buy USD$</option> 
+                                    <option value="Buy_CLP$">Buy CLP$</option>
+                                    <option value="Monthly_Rent_USD$">Monthly Rent USD$</option>
+                                    <option value="Monthly_Rent_CLP$">Monthly Rent CLP$</option>
+                                </select>
+                                <input type="number" id="notes_price"  placeholder="For example: 100" > </td>
+                        </tr>
+                        <tr>
+                            <td>Area</td>
+                            <td> 
+                                <select name="notes_tip_area" id="notes_tip_area">
+                                    <option value="">Select one option</option>
+                                    <option value="Built_area_square_feet">Built area square feet</option> 
+                                    <option value="Total_area_square_feet">Total area square feet</option> 
+                                    <option value="Built_area_square_meters">Built area square meters</option>
+                                    <option value="Total_area_square_meters">Total area square meters</option>
+                                </select>
+
+                                <input type="number" id="notes_area" placeholder="For example: 100"> </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button id="button_notes" type="button" onclick="update_location_summary_point_notes()">Save</button>
+                                <td> <span id="location_summary_notes_done_span"></span> </td>
+                            </td>
+                        </tr>
+                    </table>
+                   
+                </li> </ul>
+            </li>
+            <li>
+                <h3>Reports</h3>
+                <ul>
+                    <p>Here you can download these reports:</p>
+                    <button type="button" onClick="get_point_report();">Location Report</button>
+                    <button type="button" onClick="get_project_report();">Project Report</button>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>
+
+

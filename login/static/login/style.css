@@ -1,0 +1,97 @@
+
+body{
+    background-image: url("images/fondo6.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 50% 25%;
+}
+
+
+#div_content{
+    margin-left: auto;
+    margin-right: auto;
+    width: 250px;
+    }
+
+.div_in_content{
+    background-color: rgba(255,255,255,0.8);
+}
+
+.fix_input_text{
+    width:240px;
+    }
+
+#title span{
+    font-family: 'Arial';
+    font-weight: bolder;
+    font-size: 22px;
+}
+
+#mensaje2{
+    color: black;
+    font-weight: bold;
+    z-index: 10;
+}
+
+#cont2{
+    position: absolute;
+    right: 370px;
+    top: 280px;
+    width: 200px;
+    height: 15px;
+    padding-top: 6px;
+    padding-bottom: 4px;
+    background-color: rgba(255,255,255,0.8);
+    display: none;
+}
+
+#mensaje{
+    color: black;
+    font-weight: bold;
+    z-index: 10; 
+}
+
+#cont{
+    position: absolute;
+    right: 400px;
+    top: 450px;
+    width: 140px; 	
+    height: 15px;
+    padding-top: 6px;
+    padding-bottom: 4px;
+    background-color: rgba(255,255,255,0.8);
+    display: none;
+}
+
+
+.sign_in_up_button{
+ 	cursor: pointer;
+	background-color:rgb(56,155,210);
+	color: white;      
+}
+
+#sign_out{
+ 	position: fixed;
+ 	top: 10px;
+ 	right: 50px;
+ 	cursor: pointer;
+	background-color:rgb(56,155,210);
+	color: white;      
+}
+
+
+#image{
+	position:fixed;
+	left:46%;
+	top:9%;
+}
+
+#terms_text{
+	font-size:13px;
+	color:white;
+	background-color:black;
+	opacity: 0.9;
+	padding:5px 5px;
+	font-family:Arial;
+}
+
